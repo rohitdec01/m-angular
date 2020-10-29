@@ -7,10 +7,12 @@ import {RegisterComponent} from './register/register.component';
 import {ListEmployeeComponent} from './list-employee/list-employee.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 import {AddUpdateEmployeeComponent} from './add-update-employee/add-update-employee.component';
+import {LoggingInterceptor} from "./interceptors/logging.interceptor";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import {AddUpdateEmployeeComponent} from './add-update-employee/add-update-emplo
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
