@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-register',
@@ -13,15 +14,15 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(''),
   });
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
   }
 
   registerUser() {
-    /*this.userService.reisterUser(this.registerFormGroup.value).subscribe((result) => {
-      alert('User regiser successfully');
-    })*/
+    this.userService.reisterUser(this.registerFormGroup.value).subscribe((result) => {
+      alert('User register successfully');
+    })
   }
 }

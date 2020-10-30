@@ -11,8 +11,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 import {AddUpdateEmployeeComponent} from './add-update-employee/add-update-employee.component';
-import {LoggingInterceptor} from "./interceptors/logging.interceptor";
-import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {LoggingInterceptor} from './interceptors/logging.interceptor';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
     RegisterComponent,
     ListEmployeeComponent,
     HomeComponent,
-    AddUpdateEmployeeComponent
+    AddUpdateEmployeeComponent,
   ],
   imports: [
     BrowserModule,
