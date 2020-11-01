@@ -1,26 +1,26 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
 
-import {RegisterComponent} from './register.component';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {UserService} from '../service/user.service';
-import {of} from 'rxjs';
+import {RegisterComponent} from './register.component'
+import {HttpClientTestingModule} from '@angular/common/http/testing'
+import {UserService} from '../service/user.service'
+import {of} from 'rxjs'
 
 describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+  let component: RegisterComponent
+  let fixture: ComponentFixture<RegisterComponent>
 
   const data = {
     name: 'test',
     password: 'test',
     email: 'test',
     id: 1
-  };
+  }
 
-  let userService: jasmine.SpyObj<UserService>;
+  let userService: jasmine.SpyObj<UserService>
 
   beforeEach(async () => {
-    userService = jasmine.createSpyObj('userService', ['reisterUser']);
-    userService.reisterUser.and.returnValue(of(data));
+    userService = jasmine.createSpyObj('userService', ['reisterUser'])
+    userService.reisterUser.and.returnValue(of(data))
 
     await TestBed.configureTestingModule({
       providers: [
@@ -29,16 +29,16 @@ describe('RegisterComponent', () => {
       imports: [HttpClientTestingModule],
       declarations: [RegisterComponent]
     })
-      .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RegisterComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

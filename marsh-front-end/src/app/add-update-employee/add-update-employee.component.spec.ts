@@ -1,15 +1,15 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
 
-import {AddUpdateEmployeeComponent} from './add-update-employee.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {EmployeeService} from '../service/employee.service';
-import {of} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {AddUpdateEmployeeComponent} from './add-update-employee.component'
+import {ReactiveFormsModule} from '@angular/forms'
+import {EmployeeService} from '../service/employee.service'
+import {of} from 'rxjs'
+import {ActivatedRoute} from '@angular/router'
 
 describe('AddUpdateEmployeeComponent', () => {
-  let component: AddUpdateEmployeeComponent;
-  let fixture: ComponentFixture<AddUpdateEmployeeComponent>;
-  let appService: jasmine.SpyObj<EmployeeService>;
+  let component: AddUpdateEmployeeComponent
+  let fixture: ComponentFixture<AddUpdateEmployeeComponent>
+  let appService: jasmine.SpyObj<EmployeeService>
 
 
   const data = {
@@ -18,12 +18,12 @@ describe('AddUpdateEmployeeComponent', () => {
     address: 'Chicago IL',
     mobile: '11111111',
     email: 'test1@test1.com'
-  };
+  }
 
   beforeEach(async () => {
-    appService = jasmine.createSpyObj('appService', ['getEmployeeByID', 'updateEmployee']);
-    appService.getEmployeeByID.and.returnValue(of(data));
-    appService.updateEmployee.and.returnValue(of(data));
+    appService = jasmine.createSpyObj('appService', ['getEmployeeByID', 'updateEmployee'])
+    appService.getEmployeeByID.and.returnValue(of(data))
+    appService.updateEmployee.and.returnValue(of(data))
 
     await TestBed.configureTestingModule({
       declarations: [AddUpdateEmployeeComponent],
@@ -36,16 +36,16 @@ describe('AddUpdateEmployeeComponent', () => {
         }
       ],
       imports: [ReactiveFormsModule],
-    }).compileComponents();
-  });
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUpdateEmployeeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(AddUpdateEmployeeComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

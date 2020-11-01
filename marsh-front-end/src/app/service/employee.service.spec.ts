@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing'
 
-import {EmployeeService} from './employee.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {EmployeeService} from './employee.service'
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing'
 
 describe('AppService', () => {
-  let appService: EmployeeService;
-  let httpMock: HttpTestingController;
+  let appService: EmployeeService
+  let httpMock: HttpTestingController
 
   const data = {
     employee: [
@@ -31,7 +31,7 @@ describe('AppService', () => {
         email: 'test3@test3.com'
       }
     ]
-  };
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -39,23 +39,23 @@ describe('AppService', () => {
       providers: [
         EmployeeService,
       ]
-    });
-    appService = TestBed.inject(EmployeeService);
-    httpMock = TestBed.inject(HttpTestingController);
-  });
+    })
+    appService = TestBed.inject(EmployeeService)
+    httpMock = TestBed.inject(HttpTestingController)
+  })
 
   it('should be created', () => {
-    expect(appService).toBeTruthy();
-  });
+    expect(appService).toBeTruthy()
+  })
 
   it('getEmployeeList should call http client', () => {
     appService.getEmployeeList().subscribe(val => {
-      expect(val).toEqual(data);
-    });
+      expect(val).toEqual(data)
+    })
 
-    const request = httpMock.expectOne(appService.EMP_URL);
-    expect(request.request.method).toEqual('GET');
-    request.flush(data);
-  });
+    const request = httpMock.expectOne(appService.EMP_URL)
+    expect(request.request.method).toEqual('GET')
+    request.flush(data)
+  })
 
-});
+})

@@ -1,13 +1,13 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
 
-import {ListEmployeeComponent} from './list-employee.component';
-import {DebugElement} from '@angular/core';
-import {EmployeeService} from '../service/employee.service';
-import {of} from 'rxjs';
+import {ListEmployeeComponent} from './list-employee.component'
+import {DebugElement} from '@angular/core'
+import {EmployeeService} from '../service/employee.service'
+import {of} from 'rxjs'
 
 describe('ListEmployeeComponent', () => {
-  let employeeComponent: ListEmployeeComponent;
-  let fixture: ComponentFixture<ListEmployeeComponent>;
+  let employeeComponent: ListEmployeeComponent
+  let fixture: ComponentFixture<ListEmployeeComponent>
 
   const data = [
     {
@@ -31,15 +31,15 @@ describe('ListEmployeeComponent', () => {
       mobile: '33333333',
       email: 'test3@test3.com'
     }
-  ];
+  ]
 
-  let debugElement: DebugElement;
-  let nativeElement: HTMLElement;
-  let appService: jasmine.SpyObj<EmployeeService>;
+  let debugElement: DebugElement
+  let nativeElement: HTMLElement
+  let appService: jasmine.SpyObj<EmployeeService>
 
   beforeEach(async () => {
-    appService = jasmine.createSpyObj('appService', ['getEmployeeList']);
-    appService.getEmployeeList.and.returnValue(of(data));
+    appService = jasmine.createSpyObj('appService', ['getEmployeeList'])
+    appService.getEmployeeList.and.returnValue(of(data))
 
     await TestBed.configureTestingModule({
       declarations: [ListEmployeeComponent],
@@ -48,19 +48,19 @@ describe('ListEmployeeComponent', () => {
       ],
       imports: [] // modules
     })
-      .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListEmployeeComponent);
-    nativeElement = fixture.debugElement.nativeElement as HTMLElement;
-    employeeComponent = fixture.componentInstance;
-    debugElement = fixture.debugElement;
-    fixture.detectChanges();
-    expect(appService.getEmployeeList).toHaveBeenCalled();
-  });
+    fixture = TestBed.createComponent(ListEmployeeComponent)
+    nativeElement = fixture.debugElement.nativeElement as HTMLElement
+    employeeComponent = fixture.componentInstance
+    debugElement = fixture.debugElement
+    fixture.detectChanges()
+    expect(appService.getEmployeeList).toHaveBeenCalled()
+  })
 
   it('should create', () => {
-    expect(employeeComponent).toBeTruthy();
-  });
-});
+    expect(employeeComponent).toBeTruthy()
+  })
+})

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import {UserService} from '../service/user.service'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  email: string
+  password: string
+
+  constructor(private userService: UserService, private route: Router) {
+  }
 
   ngOnInit(): void {
   }
 
+  logInHandler() {
+    this.userService.getAuthToken(this.email, this.password).subscribe((result) => {
+      debugger
+      if (result.length > 0) { // In reality it will always return one JWT token bases ont he user/password.
+        this.userService.saveToken(result[0].token)
+        this.userService.getUserDetail(result[0].token).subscribe((loginedInUser) => {
+          this.userService.userDetailsCache.next(loginedInUser[0].name)
+          this.userService.saveUserDetail(loginedInUser) // TODO: Need to check the better soln.
+          this.route.navigate(['list'])
+        })
+      } else {
+        console.log('No user exist')
+      }
+    })
+  }
 }
