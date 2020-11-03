@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core'
-import {FormControl, FormGroup} from '@angular/forms'
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms'
 import {EmployeeService} from '../service/employee.service'
 import {ActivatedRoute} from '@angular/router'
 
@@ -12,14 +12,9 @@ export class AddUpdateEmployeeComponent implements OnInit {
   flag: boolean
   empId: string
 
-  employeeFormGroup = new FormGroup({
-    name: new FormControl(''),
-    address: new FormControl(''),
-    mobile: new FormControl(''),
-    email: new FormControl('')
-  })
+  employeeFormGroup: FormGroup
 
-  constructor(private appService: EmployeeService, private activatedRoute: ActivatedRoute) {
+  constructor(private appService: EmployeeService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -32,6 +27,22 @@ export class AddUpdateEmployeeComponent implements OnInit {
           mobile: new FormControl(result['mobile']),
           email: new FormControl(result['email'])
         })
+      })
+    } else {
+      this.employeeFormGroup = this.formBuilder.group({
+        name: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(2)])],
+        address: ['', Validators.compose([
+          Validators.minLength(2)])],
+        mobile: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(8)])],
+        email: ['', Validators.compose([
+          Validators.required,
+          Validators.email,
+          Validators.minLength(5),
+          Validators.pattern('[ -~]*')])]
       })
     }
   }

@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() userName: string
+  @Input() userDetail: any
   @Output() onLogout: EventEmitter<void> = new EventEmitter<void>()
 
   constructor() {
@@ -20,4 +20,15 @@ export class HeaderComponent implements OnInit {
     this.onLogout.emit()
   }
 
+  get showAfterLogin(): boolean {
+    return this.userDetail && this.userDetail.token
+  }
+
+  get hideAfterLogin(): boolean {
+    return !this.userDetail || !this.userDetail.token
+  }
+
+  get showIfAdmin(): boolean {
+    return this.showAfterLogin && this.userDetail.roles.includes('admin')
+  }
 }

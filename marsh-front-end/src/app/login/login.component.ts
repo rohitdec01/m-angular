@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
       if (result.length > 0) { // In reality it will always return one JWT token bases ont he user/password.
         this.userService.saveToken(result[0].token)
         this.userService.getUserDetail(result[0].token).subscribe((loginedInUser) => {
-          this.userService.userDetailsCache.next(loginedInUser[0].name)
-          this.userService.saveUserDetail(loginedInUser) // TODO: Need to check the better soln.
+          this.userService.userDetailsCache.next(loginedInUser[0])
+          this.userService.saveUserDetail(loginedInUser)
           this.router.navigate(['list'])
         })
       } else {

@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     const jwtToken = this.cookieService.get('creospan-token')
 
-    console.log(request )
+   // console.log(request )
 
     if (request.headers.get('Anonymous') !== 'undefined') {
       if (jwtToken) {

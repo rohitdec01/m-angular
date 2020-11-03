@@ -6,7 +6,7 @@ import {HomeComponent} from './home/home.component'
 import {AddUpdateEmployeeComponent} from './add-update-employee/add-update-employee.component'
 import {AdminComponent} from './admin/admin.component'
 import {AdminGuard} from './guard/admin.guard'
-import {AuthGuard} from "./guard/auth.guard";
+import {AuthGuard} from './guard/auth.guard'
 
 const routes: Route[] = [
   {component: HomeComponent, path: '', pathMatch: 'full'},

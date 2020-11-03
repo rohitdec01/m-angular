@@ -13,14 +13,19 @@ export class ListEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.getEmployeeList().subscribe((result) => {
-      this.employees = result
-    })
+    this.getEmployeeList()
   }
 
   deleteEmployee(id: any) {
     this.appService.deleteEmployee(id).subscribe((result) => {
+      this.getEmployeeList()
       console.log('Employee Deleted.') // fetch employee list again.
+    })
+  }
+
+  getEmployeeList() {
+    this.appService.getEmployeeList().subscribe((result) => {
+      this.employees = result
     })
   }
 }

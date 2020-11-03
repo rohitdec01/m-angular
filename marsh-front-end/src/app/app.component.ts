@@ -8,22 +8,21 @@ import {CookieService} from 'ngx-cookie'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  userName: string
+  userDetail: string
 
   constructor(private userService: UserService, private cookieService: CookieService) {
   }
 
   ngOnInit() {
     this.checkBrowser()
-
     this.userService.userDetailsCache.subscribe(userContext => {
       if (userContext) {
-        this.userName = userContext
+        this.userDetail = userContext
       }
     })
 
-    if (this.cookieService.get('creospan-user-name')) {
-      this.userService.userDetailsCache.next(this.cookieService.get('creospan-user-name'))
+    if (localStorage.getItem('creospan-user')) {
+      this.userService.userDetailsCache.next(JSON.parse(localStorage.getItem('creospan-user')))
     }
   }
 

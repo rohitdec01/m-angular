@@ -10,26 +10,26 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="">Home</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showAfterLogin">
         <a class="nav-link" routerLink="list">List</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showAfterLogin">
         <a class="nav-link" routerLink="add">Add</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="hideAfterLogin">
         <a class="nav-link" routerLink="register">Register</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showIfAdmin">
         <a class="nav-link" routerLink="admin">Admin</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showAfterLogin">
         <a class="nav-link" (click)="logoutHandler()">Logout</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="hideAfterLogin">
         <a class="nav-link" routerLink="login">Login</a>
       </li>
-      <li class="nav-item">
-        <span style="color: aliceblue"> Login User: {{userName}}</span>
+      <li class="nav-item" *ngIf="showAfterLogin">
+        <span style="color: aliceblue"> Login User: {{userDetail.name}}</span>
       </li>
     </ul>
   </div>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
-import {Observable, Subject} from 'rxjs'
+import {BehaviorSubject, Observable, Subject} from 'rxjs'
 import {CookieService} from 'ngx-cookie'
 import {Router} from '@angular/router'
 
@@ -8,8 +8,7 @@ import {Router} from '@angular/router'
   providedIn: 'root'
 })
 export class UserService {
-  userDetailsCache: Subject<any> = new Subject<any>()
-  userRoles: any
+  userDetailsCache: BehaviorSubject<any> = new BehaviorSubject<any>(null)
   USER_URL = 'http://localhost:3000/users'
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
@@ -34,7 +33,11 @@ export class UserService {
   }
 
   getUserRoles() {
-    return this.userRoles
+    return this.userDetailsCache.getValue().roles
+  }
+
+  public saveUserDetail(loginedInUser) {
+    localStorage.setItem('creospan-user', JSON.stringify(loginedInUser[0]))
   }
 
   public saveToken(token) {
@@ -44,14 +47,9 @@ export class UserService {
   }
 
   public logOut() {
-    this.userDetailsCache.next(null)
+    this.userDetailsCache.next({})
     this.cookieService.removeAll()
-    this.userRoles = null;
+    localStorage.clear()
     this.router.navigate(['/login'])
-  }
-
-  public saveUserDetail(loginedInUser) {
-    this.userRoles = loginedInUser[0].roles // in reality backend will pass only one object.
-    this.cookieService.put('creospan-user-name', loginedInUser[0].name)
   }
 }
