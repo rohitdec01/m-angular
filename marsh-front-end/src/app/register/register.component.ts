@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    this.userService.reisterUser(this.registerFormGroup.value).subscribe((result) => {
+    this.userService.registerUser(this.registerFormGroup.value).subscribe((result) => {
       alert('User register successfully')
     })
   }

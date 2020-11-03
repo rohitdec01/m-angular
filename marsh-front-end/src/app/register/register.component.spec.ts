@@ -20,7 +20,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     userService = jasmine.createSpyObj('userService', ['reisterUser'])
-    userService.reisterUser.and.returnValue(of(data))
+    // userService.registerUser.and.returnValue(of(data))
 
     await TestBed.configureTestingModule({
       providers: [

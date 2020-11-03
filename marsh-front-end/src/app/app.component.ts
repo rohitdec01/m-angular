@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {UserService} from './service/user.service'
-import {CookieService} from 'ngx-cookie';
+import {CookieService} from 'ngx-cookie'
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,9 @@ export class AppComponent implements OnInit {
     this.checkBrowser()
 
     this.userService.userDetailsCache.subscribe(userContext => {
-      this.userName = userContext
+      if (userContext) {
+        this.userName = userContext
+      }
     })
 
     if (this.cookieService.get('creospan-user-name')) {

@@ -9,7 +9,7 @@ import {ActivatedRoute} from '@angular/router'
 describe('AddUpdateEmployeeComponent', () => {
   let component: AddUpdateEmployeeComponent
   let fixture: ComponentFixture<AddUpdateEmployeeComponent>
-  let appService: jasmine.SpyObj<EmployeeService>
+  let employeeService: jasmine.SpyObj<EmployeeService>
 
 
   const data = {
@@ -21,14 +21,14 @@ describe('AddUpdateEmployeeComponent', () => {
   }
 
   beforeEach(async () => {
-    appService = jasmine.createSpyObj('appService', ['getEmployeeByID', 'updateEmployee'])
-    appService.getEmployeeByID.and.returnValue(of(data))
-    appService.updateEmployee.and.returnValue(of(data))
+    employeeService = jasmine.createSpyObj('employeeService', ['getEmployeeByID', 'updateEmployee'])
+    employeeService.getEmployeeByID.and.returnValue(of(data))
+    employeeService.updateEmployee.and.returnValue(of(data))
 
     await TestBed.configureTestingModule({
       declarations: [AddUpdateEmployeeComponent],
       providers: [ // providers
-        {provide: EmployeeService, useValue: appService},
+        {provide: EmployeeService, useValue: employeeService},
         {
           provide: ActivatedRoute, useValue: {
             snapshot: {params: of({id: 123})}

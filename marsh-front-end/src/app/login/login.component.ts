@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   email: string
   password: string
 
-  constructor(private userService: UserService, private route: Router) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,13 +20,12 @@ export class LoginComponent implements OnInit {
 
   logInHandler() {
     this.userService.getAuthToken(this.email, this.password).subscribe((result) => {
-      debugger
       if (result.length > 0) { // In reality it will always return one JWT token bases ont he user/password.
         this.userService.saveToken(result[0].token)
         this.userService.getUserDetail(result[0].token).subscribe((loginedInUser) => {
           this.userService.userDetailsCache.next(loginedInUser[0].name)
           this.userService.saveUserDetail(loginedInUser) // TODO: Need to check the better soln.
-          this.route.navigate(['list'])
+          this.router.navigate(['list'])
         })
       } else {
         console.log('No user exist')

@@ -9,22 +9,32 @@ import {Router} from '@angular/router'
 })
 export class UserService {
   userDetailsCache: Subject<any> = new Subject<any>()
+  userRoles: any
   USER_URL = 'http://localhost:3000/users'
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
   }
 
-  reisterUser(data): Observable<any> {
+  registerUser(data): Observable<any> {
     return this.http.post(this.USER_URL, data)
   }
 
   getAuthToken(email: string, password: string): Observable<any> {
     // in reality it should only return Json token based on the email/password.
-    return this.http.get(`${this.USER_URL}?user=${email}&password=${password}`, { headers: { Anonymous: 'undefined' } })
+    // I'm passing dummy token so that this route can be ignored in interceptor.
+    return this.http.get(`${this.USER_URL}?user=${email}&password=${password}`, {headers: {Anonymous: 'undefined'}})
   }
 
   getUserDetail(token): Observable<any> {
     return this.http.get(`${this.USER_URL}?token=${token}`)
+  }
+
+  isLogin(): boolean {
+    return !!this.cookieService.get('creospan-token')
+  }
+
+  getUserRoles() {
+    return this.userRoles
   }
 
   public saveToken(token) {
@@ -35,12 +45,13 @@ export class UserService {
 
   public logOut() {
     this.userDetailsCache.next(null)
-    this.cookieService.remove('creospan-token')
-    this.cookieService.remove('creospan-user-name')
+    this.cookieService.removeAll()
+    this.userRoles = null;
     this.router.navigate(['/login'])
   }
 
   public saveUserDetail(loginedInUser) {
+    this.userRoles = loginedInUser[0].roles // in reality backend will pass only one object.
     this.cookieService.put('creospan-user-name', loginedInUser[0].name)
   }
 }

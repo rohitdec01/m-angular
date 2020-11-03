@@ -11,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // TODO: Need to by pass login request from here.
+
     const jwtToken = this.cookieService.get('creospan-token')
 
     console.log(request )
@@ -22,11 +22,11 @@ export class AuthInterceptor implements HttpInterceptor {
           headers: request.headers.set('Authorization', `Bearer ${jwtToken}`)
         })
         return next.handle(cloned)
-      } else {
+      } /*else {
         alert('Your token has expired. Please login.')
-        this.router.navigate(['login']);
-      }
-    } else {
+        this.router.navigate(['login'])
+      }*/
+    } else { // Bypass all request where we do not need to pass token. e.g. login page.
       request.headers.delete('Anonymous')
       return next.handle(request)
     }

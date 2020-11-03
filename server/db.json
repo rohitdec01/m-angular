@@ -42,7 +42,7 @@
       "password": "test",
       "email": "test",
       "token": "test",
-      "role": [
+      "roles": [
         "user"
       ],
       "id": 1
@@ -52,7 +52,7 @@
       "password": "test1",
       "email": "test1",
       "token": "test1",
-      "role": [
+      "roles": [
         "user"
       ],
       "id": 2
@@ -62,7 +62,7 @@
       "password": "test3",
       "email": "test3",
       "token": "test3",
-      "role": [
+      "roles": [
         "user",
         "admin"
       ],
